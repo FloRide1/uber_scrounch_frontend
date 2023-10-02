@@ -1,6 +1,9 @@
 import vue from '@vitejs/plugin-vue'
 import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -9,11 +12,11 @@ export default defineConfig({
     server: {
         cors: { origin: '*' },
         proxy: {
-            '/login': 'http://127.0.0.1:3000',
-            '/auth/microsoft': 'http://127.0.0.1:3000',
-            '/auth/authorize': 'http://127.0.0.1:3000',
+            '/login': process.env.BACKEND_URL,
+            '/auth/microsoft': process.env.BACKEND_URL,
+            '/auth/authorize': process.env.BACKEND_URL,
             '/api': {
-                target: 'http://127.0.0.1:3000',
+                target: process.env.BACKEND_URL,
                 rewrite: (path) => path.replace(/^\/api/, '')
             }
         }
