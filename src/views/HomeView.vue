@@ -33,11 +33,16 @@ export default {
                 text="Nous tenons à vous rappeler qu'il reste interdit de manger en salle machine."
             >
                 <div class="text-caption">
-                    Ceci est un message de: <code>https://manger-coder.epita</code>
+                    Ceci est un message de: <code>https://manger-ou-coder.epita.fr</code>
                 </div>
             </v-alert>
-            <v-alert :type="'warning'" text="Ce site est toujours en développement par moi">
-                <div class="text-caption">ALED</div>
+            <v-alert :type="'warning'" text="Ce site est toujours en développement par moi :(">
+                <div class="text-caption">
+                    ALED <br />
+                    Develop-ement, <br />
+                    -- <br />
+                    Un état Americain <br />Fail Netiquette
+                </div>
             </v-alert>
         </v-container>
         <v-container class="d-flex justify-center flex-wrap">

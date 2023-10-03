@@ -19,7 +19,6 @@ export const useDeliveryStore = defineStore('delivery', {
                                 time: new Date(x.time)
                             }
                         })
-                        console.log(this.deliveries)
                     }
                 })
                 .catch((_err) => {

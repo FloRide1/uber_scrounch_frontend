@@ -8,17 +8,17 @@ export const useLocationStore = defineStore('location', {
     actions: {
         async update() {
             let locations = [] as Location[]
-            let res = await axios.get('/api/location/all')
-
-            if (res.status == 200) {
-                locations = res.data.map((x: LocationResponse) => {
-                    return {
-                        id: x.id,
-                        name: x.name
-                    }
-                })
-            }
-            this.locations = locations
+            axios.get('/api/location/all').then((res) => {
+                if (res.status == 200) {
+                    locations = res.data.map((x: LocationResponse) => {
+                        return {
+                            id: x.id,
+                            name: x.name
+                        }
+                    })
+                }
+                this.locations = locations
+            })
         }
     }
 })

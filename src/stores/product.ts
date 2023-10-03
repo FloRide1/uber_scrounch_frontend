@@ -8,23 +8,23 @@ import { defineStore } from 'pinia'
 export const useProductStore = defineStore('product', {
     state: () => ({ products: [] as Product[] }),
     actions: {
-        async update() {
+        update() {
             let products = [] as Product[]
-            let res = await axios.get('/api/product/all')
-
-            if (res.status == 200) {
-                products = res.data.map((x: ProductResponse) => {
-                    return {
-                        id: x.id,
-                        name: x.name,
-                        image_url: x.image_url,
-                        description: x.description,
-                        price: x.price,
-                        stock: x.stock
-                    }
-                })
-            }
-            this.products = products
+            axios.get('/api/product/all').then((res) => {
+                if (res.status == 200) {
+                    products = res.data.map((x: ProductResponse) => {
+                        return {
+                            id: x.id,
+                            name: x.name,
+                            image_url: x.image_url,
+                            description: x.description,
+                            price: x.price,
+                            stock: x.stock
+                        }
+                    })
+                }
+                this.products = products
+            })
         }
     }
 })

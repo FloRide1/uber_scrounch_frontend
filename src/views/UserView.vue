@@ -11,7 +11,6 @@ export default {
     },
     methods: {
         async connect() {
-            useUserStore().update()
         }
     },
     computed: {
@@ -22,9 +21,6 @@ export default {
             return res
         }
     },
-    mounted() {
-        this.connect()
-    }
 }
 </script>
 

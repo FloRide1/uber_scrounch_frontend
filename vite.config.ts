@@ -17,7 +17,8 @@ export default defineConfig({
             '/auth/authorize': process.env.BACKEND_URL,
             '/api': {
                 target: process.env.BACKEND_URL,
-                rewrite: (path) => path.replace(/^\/api/, '')
+                rewrite: (path) => path.replace(/^\/api/, ''),
+                changeOrigin: true
             }
         }
     }
