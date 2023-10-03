@@ -26,6 +26,20 @@ export default {
 
 <template>
     <main>
+        <v-container>
+            <v-alert
+                class="mb-2"
+                :type="'error'"
+                text="Nous tenons à vous rappeler qu'il reste interdit de manger en salle machine."
+            >
+                <div class="text-caption">
+                    Ceci est un message de: <code>https://manger-coder.epita</code>
+                </div>
+            </v-alert>
+            <v-alert :type="'warning'" text="Ce site est toujours en développement par moi">
+                <div class="text-caption">ALED</div>
+            </v-alert>
+        </v-container>
         <v-container class="d-flex justify-center flex-wrap">
             <v-card width="250" class="ma-2" @click="" v-for="item in products">
                 <v-card-title> {{ item.name }} </v-card-title>

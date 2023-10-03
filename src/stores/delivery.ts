@@ -31,7 +31,7 @@ export const useDeliveryStore = defineStore('delivery', {
         next_delivery(): null | Delivery {
             if (this.deliveries == null) return null
 
-            return this.deliveries.sort((a, b) => a.time > b.time)[0]
+            return this.deliveries[0]
         },
         next_delivery_string(): null | string {
             if (this.next_delivery == null) return null

@@ -101,11 +101,7 @@ export default {
 
         <div class="d-flex justify-center">
             <v-slide-group v-model="selected_location" show-arrows mandatory>
-                <v-slide-group-item
-                    v-for="item in locations"
-                    :key="item.id"
-                    v-slot="{ isSelected, toggle, selectedClass }"
-                >
+                <v-slide-group-item v-for="item in locations" v-slot="{ isSelected, toggle }">
                     <v-btn
                         class="ma-2"
                         rounded
