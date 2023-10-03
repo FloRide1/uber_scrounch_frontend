@@ -10,6 +10,7 @@ export default {
     data() {
         return {
             drawer: false,
+            ban: storeToRefs(useUserStore()).ban,
             email: storeToRefs(useUserStore()).email,
             command: storeToRefs(useCommandStore()).command
         }
@@ -39,7 +40,7 @@ export default {
 </script>
 
 <template>
-    <v-app>
+    <v-app v-if="ban == false">
         <header>
             <v-app-bar density="compact">
                 <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
@@ -63,6 +64,11 @@ export default {
 
         <v-main>
             <RouterView />
+        </v-main>
+    </v-app>
+    <v-app v-else>
+        <v-main>
+            <v-alert class="mb-2" :type="'error'" title="PDTR t ban" />
         </v-main>
     </v-app>
 </template>

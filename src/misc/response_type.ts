@@ -23,3 +23,11 @@ export type DeliveryResponse = {
 
     time: number
 }
+
+export type UserResponse = {
+    id: number
+
+    email: string
+
+    ban: boolean | null
+}
