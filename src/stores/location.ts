@@ -1,8 +1,7 @@
 import type { LocationResponse } from '@/misc/response_type'
-import type { Command, Product } from '@/misc/types'
+import type { Location } from '@/misc/types'
 import axios from 'axios'
 import { defineStore } from 'pinia'
-import { computed, ref } from 'vue'
 
 export const useLocationStore = defineStore('location', {
     state: () => ({ locations: null as null | Location[] }),

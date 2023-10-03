@@ -1,8 +1,7 @@
 import type { ProductResponse } from '@/misc/response_type'
-import type { Command, Product } from '@/misc/types'
+import type { Product } from '@/misc/types'
 import axios from 'axios'
 import { defineStore } from 'pinia'
-import { computed, ref } from 'vue'
 
 // TODO: Move it move it ;)
 
