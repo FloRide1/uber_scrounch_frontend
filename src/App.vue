@@ -68,7 +68,8 @@ export default {
     </v-app>
     <v-app v-else>
         <v-main>
-            <v-alert class="mb-2" :type="'error'" title="PDTR t ban" />
+            PTDR t ban
+            <img src="@/assets/ohsicrigolo.png" />
         </v-main>
     </v-app>
 </template>
