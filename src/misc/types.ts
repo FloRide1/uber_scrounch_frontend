@@ -4,12 +4,27 @@ export type Product = {
     image_url: string
     description: null | string
     price: number
-    product: number
     stock: number
 }
 
 export type Command = {
-    items: [Product, number][]
+    id: number
+
+    confirmed: boolean
+
+    delivered: boolean
+
+    canceled: boolean
+
+    delivery: Date | null
+
+    items: CommandItem[]
+}
+
+export type CommandItem = {
+    product: Product
+
+    amount: number
 }
 
 export type Location = {

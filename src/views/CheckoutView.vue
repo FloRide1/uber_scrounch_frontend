@@ -42,9 +42,9 @@ export default {
 
                 items: this.command.items.map((x) => {
                     return {
-                        id: x[0].id,
+                        id: x.product.id,
 
-                        amount: x[1]
+                        amount: x.amount
                     }
                 })
             }
@@ -134,17 +134,17 @@ export default {
                 v-for="item in command?.items"
                 width="250"
             >
-                <v-card-title> {{ item[0].name }} </v-card-title>
+                <v-card-title> {{ item.product.name }} </v-card-title>
                 <v-card-subtitle class="mb-3">
-                    {{ item[1] }} × {{ convert_to_display_price(item[0].price) }}
+                    {{ item.amount }} × {{ convert_to_display_price(item.product.price) }}
                 </v-card-subtitle>
-                <v-img :src="item[0].image_url" class="mx-2" aspect-ratio="1/1" />
+                <v-img :src="item.product.image_url" class="mx-2" aspect-ratio="1/1" />
                 <v-card-actions class="d-flex justify-space-between mt-3">
-                    <v-btn @click="remove(item[0])">
+                    <v-btn @click="remove(item.product)">
                         <v-icon size="x-large" icon="fa-solid fa-circle-minus" />
                     </v-btn>
                     <div></div>
-                    <v-btn @click="add(item[0])" :disabled="total_item >= 6">
+                    <v-btn @click="add(item.product)" :disabled="total_item >= 6">
                         <v-icon size="x-large" icon="fa-solid fa-circle-plus" />
                     </v-btn>
                 </v-card-actions>
