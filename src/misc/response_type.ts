@@ -31,3 +31,29 @@ export type UserResponse = {
 
     ban: boolean | null
 }
+
+export type CommandResponse = {
+    id: number
+
+    confirmed: boolean
+
+    delivered: boolean
+
+    canceled: boolean
+
+    delivery: number | null
+
+    items: CommandItemResponse[]
+}
+
+export type CommandItemResponse = {
+    id: number
+
+    product_name: string
+
+    amount: number
+
+    price: number
+
+    image_url: string
+}

@@ -1,4 +1,6 @@
+import type { CommandResponse } from '@/misc/response_type'
 import type { Command, Product } from '@/misc/types'
+import axios from 'axios'
 import { defineStore } from 'pinia'
 
 export const useCommandStore = defineStore('command', {
@@ -37,6 +39,44 @@ export const useCommandStore = defineStore('command', {
             } else {
                 this.command.items[index].amount--
             }
+        },
+        update() {
+            axios.get('/api/command').then((res) => {
+                if (res.status == 200) {
+                    let data: CommandResponse[] = res.data
+                    this.past_commands = data.map((x) => {
+                        return {
+                            id: x.id,
+                            confirmed: x.confirmed,
+                            delivery: x.delivery != null ? new Date(x.delivery) : null,
+                            canceled: x.canceled,
+                            delivered: x.delivered,
+                            items: x.items.map((x) => {
+                                return {
+                                    product: {
+                                        id: x.id,
+
+                                        name: x.product_name,
+
+                                        // TODO: Add find product
+                                        image_url: x.image_url,
+
+                                        price: x.price,
+
+                                        description: null,
+
+                                        stock: 0,
+
+                                        product: 0
+                                    },
+
+                                    amount: x.amount
+                                }
+                            })
+                        }
+                    })
+                }
+            })
         }
     },
 
