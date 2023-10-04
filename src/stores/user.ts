@@ -1,7 +1,6 @@
 import type { UserResponse } from '@/misc/response_type'
 import axios from 'axios'
 import { defineStore } from 'pinia'
-import { computed, ref } from 'vue'
 
 export const useUserStore = defineStore('user', {
     state: () => ({ email: null as string | null, ban: false }),

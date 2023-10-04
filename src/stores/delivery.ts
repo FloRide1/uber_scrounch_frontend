@@ -2,7 +2,6 @@ import type { DeliveryResponse } from '@/misc/response_type'
 import type { Delivery } from '@/misc/types'
 import axios from 'axios'
 import { defineStore } from 'pinia'
-import { computed, ref } from 'vue'
 
 export const useDeliveryStore = defineStore('delivery', {
     state: () => ({ deliveries: null as Delivery[] | null }),
