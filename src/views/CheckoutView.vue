@@ -34,10 +34,11 @@ export default {
             this.loading = true
 
             // TODO : Throw error
-            if (this.command == null) return
+            if (this.command == null || this.selected_location == null || this.locations == null)
+                return
 
             let req = {
-                location: this.selected_location,
+                location: this.locations[this.selected_location].id,
 
                 items: this.command.items.map((x) => {
                     return {
