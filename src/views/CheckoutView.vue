@@ -112,6 +112,13 @@ export default {
             variant="outlined"
             text="Pas plus de 6 items par commande :)."
         />
+        <v-alert
+            v-if="total_price < 1.0"
+            class="ma-2"
+            :type="'warning'"
+            variant="outlined"
+            text="Vous devez commandez pour 1€ minimum :)"
+        />
         <div class="d-flex justify-center">
             <v-slide-group v-model="selected_location" show-arrows mandatory>
                 <v-slide-group-item v-for="item in locations" v-slot="{ isSelected, toggle }">
@@ -158,7 +165,11 @@ export default {
             </v-btn>
             <v-btn
                 :disabled="
-                    loading || total_price == 0 || total_item > 6 || selected_location == null
+                    loading ||
+                    total_price == 0 ||
+                    total_price < 1 ||
+                    total_item > 6 ||
+                    selected_location == null
                 "
                 :loading="loading"
                 @click="process"
