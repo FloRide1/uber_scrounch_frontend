@@ -58,7 +58,7 @@ export default {
                     prepend-icon="fa-solid fa-parachute-box"
                     title="Mes Commandes"
                     value="home"
-                    to="/"
+                    to="/command"
                 />
             </v-navigation-drawer>
         </header>
