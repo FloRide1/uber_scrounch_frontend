@@ -67,4 +67,3 @@ export default {
         </v-container>
     </main>
 </template>
-Nom du Produit Nom du Produit
