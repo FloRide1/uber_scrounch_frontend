@@ -43,9 +43,9 @@ export default {
     <v-app v-if="ban == false">
         <header>
             <v-app-bar density="compact">
-                <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
-                <v-btn icon="fa-solid fa-house" class="mr-2" to="/" />
-                Next Delivery: {{ next_delivery_string }}
+                <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+                <!-- <v-btn icon="fa-solid fa-house" class="mr-2" to="/" /> -->
+                Prochaine Livraison: {{ next_delivery_string }}
                 <v-spacer />
                 <v-btn icon v-if="command_number" to="/checkout">
                     <v-badge color="error" :content="command_number">
@@ -59,6 +59,12 @@ export default {
             </v-app-bar>
             <v-navigation-drawer v-model="drawer" temporary>
                 <v-list-item prepend-icon="md:dashboard" title="Home" value="home" to="/" />
+                <v-list-item
+                    prepend-icon="fa-solid fa-parachute-box"
+                    title="Mes Commandes"
+                    value="home"
+                    to="/"
+                />
             </v-navigation-drawer>
         </header>
 

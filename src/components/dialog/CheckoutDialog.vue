@@ -30,8 +30,9 @@ export default {
         status_code(value: number) {
             switch (value) {
                 case 201:
-                    this.title = "You're command has been successfully created"
-                    this.text = 'Now, you can just wait until we confirm your order'
+                    this.title = 'Votre commande a bien été créée'
+                    this.text =
+                        'Maintenant, vous pouvez juste attendre que nous validions votre commande.'
                     break
                 default:
                     this.title = 'An Error has occured:'
