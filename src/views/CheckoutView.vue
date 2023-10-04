@@ -1,5 +1,5 @@
 <script lang="ts">
-import { mapActions, storeToRefs } from 'pinia'
+import { mapActions, mapState, storeToRefs } from 'pinia'
 import { useCommandStore } from '@/stores/command'
 import type { Product } from '@/misc/types'
 import convert_to_display_price from '@/misc/utils'
@@ -39,7 +39,7 @@ export default {
             let req = {
                 location: this.selected_location,
 
-                items: this.command.map((x) => {
+                items: this.command.items.map((x) => {
                     return {
                         id: x[0].id,
 
@@ -64,19 +64,17 @@ export default {
                 })
         },
         reset() {
-            this.command = []
+            if (this.command == null) return
+            this.command.items = []
         },
         convert_to_display_price(price: number): string {
             return convert_to_display_price(price)
         }
     },
     computed: {
-        total(): number {
-            if (this.command == null) return 0
-            return this.command.reduce((a, b) => a + b[0].price * b[1], 0)
-        },
+        ...mapState(useCommandStore, ['total_price', 'total_item']),
         total_string(): string {
-            return convert_to_display_price(this.total)
+            return convert_to_display_price(this.total_price)
         }
     },
     mounted() {
@@ -115,7 +113,12 @@ export default {
         </div>
 
         <v-container class="d-flex justify-center flex-wrap">
-            <v-card :disabled="loading" class="rounded-lg ma-2" v-for="item in command" width="250">
+            <v-card
+                :disabled="loading"
+                class="rounded-lg ma-2"
+                v-for="item in command?.items"
+                width="250"
+            >
                 <v-card-title> {{ item[0].name }} </v-card-title>
                 <v-card-subtitle class="mb-3">
                     {{ item[1] }} × {{ convert_to_display_price(item[0].price) }}
@@ -139,13 +142,15 @@ export default {
                 <span>Reset</span>
             </v-btn>
             <v-btn
-                :disabled="loading || total == 0 || selected_location == null"
+                :disabled="
+                    loading || total_price == 0 || total_item > 6 || selected_location == null
+                "
                 :loading="loading"
                 @click="process"
             >
                 <v-icon icon="fa-solid fa-circle-check" />
-                <span>Validate</span>
-                <span v-if="total != 0">{{ total_string }}</span>
+                <span>Valider</span>
+                <span v-if="total_price != 0">{{ total_string }}</span>
             </v-btn>
         </v-bottom-navigation>
     </main>

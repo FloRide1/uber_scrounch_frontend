@@ -8,7 +8,9 @@ export type Product = {
     stock: number
 }
 
-export type Command = [Product, number][]
+export type Command = {
+    items: [Product, number][]
+}
 
 export type Location = {
     id: number

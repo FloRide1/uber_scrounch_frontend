@@ -3,7 +3,7 @@ import type { Product } from '@/misc/types'
 import convert_to_display_price from '@/misc/utils'
 import { useCommandStore } from '@/stores/command'
 import { useProductStore } from '@/stores/product'
-import { mapActions, storeToRefs } from 'pinia'
+import { mapActions, mapState, storeToRefs } from 'pinia'
 
 export default {
     data() {
@@ -20,6 +20,9 @@ export default {
         convert_to_display_price(price: number): string {
             return convert_to_display_price(price)
         }
+    },
+    computed: {
+        ...mapState(useCommandStore, ['total_item'])
     }
 }
 </script>

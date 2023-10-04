@@ -22,13 +22,8 @@ export default {
             let res = this.email[0] + this.email.split('.')[1][0]
             return res
         },
-        command_number(): number {
-            if (this.command == null) {
-                return 0
-            }
-            return this.command.reduce((a, b) => a + b[1], 0)
-        },
-        ...mapState(useDeliveryStore, ['next_delivery_string'])
+        ...mapState(useDeliveryStore, ['next_delivery_string']),
+        ...mapState(useCommandStore, ['total_item'])
     },
     mounted() {
         useProductStore().update()
@@ -47,8 +42,8 @@ export default {
                 <!-- <v-btn icon="fa-solid fa-house" class="mr-2" to="/" /> -->
                 Prochaine Livraison: {{ next_delivery_string }}
                 <v-spacer />
-                <v-btn icon v-if="command_number" to="/checkout">
-                    <v-badge color="error" :content="command_number">
+                <v-btn icon v-if="total_item" to="/checkout">
+                    <v-badge color="error" :content="total_item">
                         <v-icon icon="fa-solid fa-basket-shopping" />
                     </v-badge>
                 </v-btn>
