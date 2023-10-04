@@ -60,7 +60,7 @@ export default {
                         @click="add(item)"
                         :disabled="total_item >= 6"
                     >
-                        Add
+                        Ajouter
                     </v-btn>
                 </v-card-actions>
             </v-card>
