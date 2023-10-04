@@ -54,7 +54,14 @@ export default {
                 <v-card-subtitle> {{ convert_to_display_price(item.price) }} </v-card-subtitle>
                 <v-img :src="item.image_url" class="mx-2" max-height="200" aspect-ratio="1/1" />
                 <v-card-actions class="d-flex justify-center">
-                    <v-btn variant="tonal" color="info" @click="add(item)"> Add </v-btn>
+                    <v-btn
+                        variant="tonal"
+                        color="info"
+                        @click="add(item)"
+                        :disabled="total_item >= 6"
+                    >
+                        Add
+                    </v-btn>
                 </v-card-actions>
             </v-card>
         </v-container>

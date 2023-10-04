@@ -97,6 +97,20 @@ export default {
             status_message="status_message"
         />
 
+        <v-alert
+            v-if="selected_location == null"
+            class="ma-2"
+            :type="'warning'"
+            variant="outlined"
+            text="Merci de bien, sélectionnez votre salle."
+        />
+        <v-alert
+            v-if="total_item >= 6"
+            class="ma-2"
+            :type="'warning'"
+            variant="outlined"
+            text="Pas plus de 6 items par commande :)."
+        />
         <div class="d-flex justify-center">
             <v-slide-group v-model="selected_location" show-arrows mandatory>
                 <v-slide-group-item v-for="item in locations" v-slot="{ isSelected, toggle }">
@@ -129,7 +143,7 @@ export default {
                         <v-icon size="x-large" icon="fa-solid fa-circle-minus" />
                     </v-btn>
                     <div></div>
-                    <v-btn @click="add(item[0])">
+                    <v-btn @click="add(item[0])" :disabled="total_item >= 6">
                         <v-icon size="x-large" icon="fa-solid fa-circle-plus" />
                     </v-btn>
                 </v-card-actions>
