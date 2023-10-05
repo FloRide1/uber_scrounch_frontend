@@ -1,8 +1,9 @@
 <script lang="ts">
-import type { Command, CommandItem, Product } from '@/misc/types'
-import convert_to_display_price from '@/misc/utils'
+import type { Command, CommandItem } from '@/misc/types'
 import { useCommandStore } from '@/stores/command'
-import { storeToRefs, mapActions, mapState } from 'pinia'
+import { useUserStore } from '@/stores/user'
+import axios from 'axios'
+import { storeToRefs, mapActions } from 'pinia'
 
 export default {
     data() {
@@ -31,7 +32,11 @@ export default {
         },
 
         command_item_display(item: CommandItem): string {
-            return item.product.name + ' × ' + item.amount
+            return item.amount + ' × ' + item.product.name
+        },
+
+        close_command(item: Command) {
+            axios.put('/api/command/close/' + item.id)
         }
     },
     computed: {
@@ -54,8 +59,11 @@ export default {
         }
     },
     mounted() {
+        if (useUserStore().email == null) {
+            this.$router.push('/user')
+        }
         this.update()
-        setInterval(() => this.update(), 10000)
+        setInterval(() => this.update(), 60000)
     }
 }
 </script>
@@ -63,11 +71,19 @@ export default {
 <template>
     <main>
         <v-container>
+            <v-alert
+                class="mb-3"
+                type="info"
+                text="Vous n'avez pas de commande ¯\_(ツ)_/¯"
+                v-if="commands_ordered == null || commands_ordered?.length == 0"
+            />
             <div v-for="item in commands_ordered">
                 <v-alert
                     class="mb-3"
                     :type="item.confirmed ? 'success' : 'info'"
                     v-if="!item.canceled && !item.delivered"
+                    @click:close="close_command(item)"
+                    closable
                 >
                     <h4 v-if="item.confirmed">Validé pour : {{ command_hour_display(item) }}</h4>
                     <h4 v-else>En cours de validation: <v-progress-circular indeterminate /></h4>
@@ -81,11 +97,8 @@ export default {
                     :type="item.canceled ? 'error' : 'success'"
                     v-else
                 >
-                    <h4 v-if="item.confirmed">
-                        Livré le {{ command_date_display(item) }} a
-                        {{ command_hour_display(item) }}
-                    </h4>
-                    <h4 v-else>Commande Annulé</h4>
+                    <h4 v-if="item.confirmed">Livré le {{ command_date_display(item) }}</h4>
+                    <h4 v-else>Commande Annulée</h4>
                     <h6 v-for="i in item.items">
                         {{ command_item_display(i) }}
                     </h6>
