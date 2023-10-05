@@ -36,3 +36,11 @@ export type Delivery = {
     id: number
     time: Date
 }
+
+export type User = {
+    id: number
+
+    email: string
+
+    ban: boolean
+}

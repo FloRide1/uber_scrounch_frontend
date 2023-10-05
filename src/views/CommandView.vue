@@ -59,7 +59,7 @@ export default {
         }
     },
     mounted() {
-        if (useUserStore().email == null) {
+        if (useUserStore().user == null) {
             this.$router.push('/user')
         }
         this.update()

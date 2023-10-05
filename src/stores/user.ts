@@ -1,9 +1,10 @@
 import type { UserResponse } from '@/misc/response_type'
+import type { User } from '@/misc/types'
 import axios from 'axios'
 import { defineStore } from 'pinia'
 
 export const useUserStore = defineStore('user', {
-    state: () => ({ email: null as string | null, ban: false }),
+    state: () => ({ user: null as null | User }),
     actions: {
         async update() {
             axios
@@ -11,16 +12,18 @@ export const useUserStore = defineStore('user', {
                 .then((res) => {
                     if (res.status == 200) {
                         let data: UserResponse = res.data
-                        this.change_mail(data.email)
-                        this.ban = data.ban != null ? data.ban : false
+                        this.user = {
+                            id: data.id,
+
+                            email: data.email,
+
+                            ban: data.ban != null ? data.ban : false
+                        }
                     }
                 })
                 .catch((_err) => {
                     // Do nothing, you're just not connected
                 })
-        },
-        change_mail(email: string) {
-            this.email = email
         }
     }
 })

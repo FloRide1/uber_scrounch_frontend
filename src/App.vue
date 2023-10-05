@@ -10,16 +10,15 @@ export default {
     data() {
         return {
             drawer: false,
-            ban: storeToRefs(useUserStore()).ban,
-            email: storeToRefs(useUserStore()).email,
+            user: storeToRefs(useUserStore()).user,
             command: storeToRefs(useCommandStore()).command
         }
     },
     computed: {
         email_inital(): null | string {
-            if (this.email == null) return null
+            if (this.user == null) return null
 
-            let res = this.email[0] + this.email.split('.')[1][0]
+            let res = this.user.email[0] + this.user.email.split('.')[1][0]
             return res
         },
         ...mapState(useDeliveryStore, ['next_delivery_string']),
@@ -35,7 +34,7 @@ export default {
 </script>
 
 <template>
-    <v-app v-if="ban == false">
+    <v-app v-if="user == null || user.ban == false">
         <header>
             <v-app-bar density="compact">
                 <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
@@ -48,7 +47,7 @@ export default {
                     </v-badge>
                 </v-btn>
                 <v-btn icon to="/user">
-                    <v-avatar v-if="email == null" icon="fa-solid fa-circle-user" />
+                    <v-avatar v-if="user == null" icon="fa-solid fa-circle-user" />
                     <v-avatar color="info" v-else> {{ email_inital }} </v-avatar>
                 </v-btn>
             </v-app-bar>
