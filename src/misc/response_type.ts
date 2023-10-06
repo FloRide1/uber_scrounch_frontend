@@ -29,7 +29,9 @@ export type UserResponse = {
 
     email: string
 
-    ban: boolean | null
+    is_banned: boolean
+
+    is_admin: boolean
 }
 
 export type CommandResponse = {
