@@ -49,21 +49,23 @@ export default {
             </v-alert>
         </v-container>
         <v-container class="d-flex justify-center flex-wrap">
-            <v-card width="250" class="ma-2" @click="" v-for="item in products">
-                <v-card-title> {{ item.name }} </v-card-title>
-                <v-card-subtitle> {{ convert_to_display_price(item.price) }} </v-card-subtitle>
-                <v-img :src="item.image_url" class="mx-2" max-height="200" aspect-ratio="1/1" />
-                <v-card-actions class="d-flex justify-center">
-                    <v-btn
-                        variant="tonal"
-                        color="info"
-                        @click="add(item)"
-                        :disabled="total_item >= 6"
-                    >
-                        Ajouter
-                    </v-btn>
-                </v-card-actions>
-            </v-card>
+            <div v-for="item in products">
+                <v-card width="250" class="ma-2" v-if="item.stock != 0" @click="">
+                    <v-card-title> {{ item.name }} </v-card-title>
+                    <v-card-subtitle> {{ convert_to_display_price(item.price) }} </v-card-subtitle>
+                    <v-img :src="item.image_url" class="mx-2" max-height="200" aspect-ratio="1/1" />
+                    <v-card-actions class="d-flex justify-center">
+                        <v-btn
+                            variant="tonal"
+                            color="info"
+                            @click="add(item)"
+                            :disabled="total_item >= 6"
+                        >
+                            Ajouter
+                        </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </div>
         </v-container>
     </main>
 </template>
