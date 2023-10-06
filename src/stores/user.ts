@@ -17,7 +17,9 @@ export const useUserStore = defineStore('user', {
 
                             email: data.email,
 
-                            ban: data.ban != null ? data.ban : false
+                            ban: data.is_banned,
+
+                            admin: data.is_admin
                         }
                     }
                 })

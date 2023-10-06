@@ -54,10 +54,18 @@ export default {
             <v-navigation-drawer v-model="drawer" temporary>
                 <v-list-item prepend-icon="md:dashboard" title="Home" value="home" to="/" />
                 <v-list-item
+                    :disabled="user == null"
                     prepend-icon="fa-solid fa-parachute-box"
                     title="Mes Commandes"
                     value="home"
                     to="/command"
+                />
+                <v-list-item
+                    v-if="user != null && user.admin"
+                    prepend-icon="fa-solid fa-wand-magic-sparkles"
+                    title="Admin"
+                    value="admin"
+                    to="/admin"
                 />
             </v-navigation-drawer>
         </header>

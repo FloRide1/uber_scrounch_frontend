@@ -43,4 +43,6 @@ export type User = {
     email: string
 
     ban: boolean
+
+    admin: boolean
 }
