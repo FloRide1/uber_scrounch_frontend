@@ -28,8 +28,8 @@ export default {
 </script>
 
 <template>
-    <main>
-        <v-container>
+    <main >
+        <v-container class="alert">
             <v-alert
                 class="mb-2"
                 :type="'error'"
@@ -48,12 +48,12 @@ export default {
                 </div>
             </v-alert>
         </v-container>
-        <v-container class="d-flex justify-center flex-wrap">
+        <v-container class="d-flex justify-center flex-wrap container">
             <div v-for="item in products">
-                <v-card width="250" class="ma-2" v-if="item.stock != 0" @click="">
-                    <v-card-title> {{ item.name }} </v-card-title>
+                <v-card class="product" v-if="item.stock != 0" @click="">
+                    <v-card-title class="title"> {{ item.name }} </v-card-title>
                     <v-card-subtitle> {{ convert_to_display_price(item.price) }} </v-card-subtitle>
-                    <v-img :src="item.image_url" class="mx-2" max-height="200" aspect-ratio="1/1" />
+                    <v-img :src="item.image_url" class="mx-2 image" max-height="200" aspect-ratio="1/1" />
                     <v-card-actions class="d-flex justify-center">
                         <v-btn
                             variant="tonal"
@@ -69,3 +69,30 @@ export default {
         </v-container>
     </main>
 </template>
+
+<style scoped>
+.product {
+  width: min(250px, 42vw);
+  margin: 5px;
+}
+
+.image {
+  border-radius: 5px;
+}
+
+@media (max-width: 600px) {
+  .alert {
+    font-size: 0.8rem;
+    line-height: 0.8rem;
+  }
+
+  .title {
+    font-size: 1.1rem;
+    line-height: 1rem;
+  }
+
+  .container{
+    padding: 0;
+  }
+}
+</style>
